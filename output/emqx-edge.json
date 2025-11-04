@@ -1,0 +1,93 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "EMQX Edge - Lightweight MQTT Broker for IoT Edge",
+  "description": "Lightweight MQTT broker for IoT edge, EMQX Edge delivers scalable, secure MQTT: <5ms latency, 100K+ connections, 1M+ msgs/sec, <10MB footprint. For IIoT.",
+  "url": "https://www.emqx.com/en/products/emqx-edge",
+  "inLanguage": "en",
+  "keywords": [
+    "EMQX Edge",
+    "Lightweight MQTT broker",
+    "IoT edge",
+    "edge MQTT broker",
+    "MQTT 5.0",
+    "industrial IoT",
+    "edge computing",
+    "OPC UA integration"
+  ],
+  "author": {
+    "@type": "Organization",
+    "name": "EMQ",
+    "url": "https://www.emqx.com/en",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://assets.emqx.com/images/authors/logo.png"
+    },
+    "sameAs": [
+      "https://x.com/EMQTech",
+      "https://www.linkedin.com/company/emqtech",
+      "https://github.com/emqx",
+      "https://www.youtube.com/channel/UC5FjR77ErAxvZENEWzQaO5Q",
+      "https://www.crunchbase.com/organization/emq-technologies"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EMQ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://assets.emqx.com/images/authors/logo.png"
+    }
+  },
+  "potentialAction": {
+    "@type": "ReadAction",
+    "target": [
+      "https://www.emqx.com/en/products/emqx-edge"
+    ]
+  },
+  "mainEntity": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is EMQX Edge?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "EMQX Edge is a lightweight MQTT broker specifically designed for the industrial IoT edge. It runs on resource-constrained hardware (like industrial PCs and gateways) to manage local device-to-device communication, process data in real-time, and securely bridge data to the cloud."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is EMQX Edge different from EMQX Neuron?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "They work together. EMQX Neuron is a connectivity gateway that collects data from various industrial protocols (like Modbus, OPC-UA) and converts it to MQTT. EMQX Edge is the MQTT broker that receives, processes, and routes that MQTT data. Neuron connects to the devices; Edge manages the data flow."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is EMQX Edge different from EMQX Enterprise/Cloud?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "EMQX Edge is optimized for deployment on edge hardware with limited resources. EMQX Enterprise and Cloud are large-scale, clusterable platforms designed for high-availability, massive-scale deployments in data centers or the cloud. Edge bridges data to Enterprise or Cloud."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can EMQX Edge run offline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. EMQX Edge operates autonomously to manage all local data communication. If the connection to the cloud is lost, it will buffer data (based on configuration) and automatically sync it once the connection is restored, ensuring no data loss."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is EMQX Edge free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "EMQX Edge is free for use cases with up to 10 concurrent connections. For applications requiring more connections or commercial support, we offer commercial licenses: https://docs.emqx.com/en/emqx-edge/latest/license-policy.html."
+        }
+      }
+    ]
+  }
+}

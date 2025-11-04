@@ -1,3 +1,4 @@
 *
 !.gitignore
 !automotive.json
+!emqx-edge.json

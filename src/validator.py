@@ -18,9 +18,11 @@ class StructuredDataValidator:
         'FAQPage',
         'Article',
         'Organization',
+        'SoftwareApplication',  # 软件产品
         'Question',  # FAQ 使用
         'Answer',  # FAQ 使用
         'ImageObject',  # 辅助类型
+        'ContactPoint',  # Organization 使用
     ]
 
     @classmethod
@@ -64,6 +66,8 @@ class StructuredDataValidator:
             return cls._validate_article(data)
         elif schema_type == 'Organization':
             return cls._validate_organization(data)
+        elif schema_type == 'SoftwareApplication':
+            return cls._validate_software_application(data)
 
         # 对于其他辅助类型,只要有必需字段就通过
         return True, None
@@ -202,8 +206,78 @@ class StructuredDataValidator:
 
         必需字段:
         - name: 组织名称
+
+        推荐字段:
+        - contactPoint: 联系方式数组
         """
         if 'name' not in data:
             return False, 'Organization must have name field'
+
+        # 如果有 contactPoint,验证其结构
+        if 'contactPoint' in data:
+            contact_points = data['contactPoint']
+            if not isinstance(contact_points, list):
+                return False, 'Organization contactPoint must be an array'
+
+            for i, contact in enumerate(contact_points):
+                if not isinstance(contact, dict):
+                    return False, f'ContactPoint {i + 1} must be a dictionary'
+
+                if contact.get('@type') != 'ContactPoint':
+                    return False, f'ContactPoint {i + 1} must have @type: "ContactPoint"'
+
+                if 'contactType' not in contact:
+                    return False, f'ContactPoint {i + 1} must have contactType field'
+
+        return True, None
+
+    @classmethod
+    def _validate_software_application(cls, data: Dict[str, Any]) -> tuple[bool, Optional[str]]:
+        """
+        验证 SoftwareApplication 类型
+
+        必需字段:
+        - name: 应用名称
+
+        推荐字段:
+        - description: 应用描述
+        - url: 应用URL
+        - applicationCategory: 应用分类
+        - operatingSystem: 支持的操作系统
+        - featureList: 功能列表
+        - manufacturer: 制造商
+        - keywords: 关键词数组
+        """
+        # 必需字段
+        if 'name' not in data:
+            return False, 'SoftwareApplication must have name field'
+
+        # 如果有 featureList,验证其为数组
+        if 'featureList' in data:
+            features = data['featureList']
+            if not isinstance(features, list):
+                return False, 'SoftwareApplication featureList must be an array'
+            if not all(isinstance(f, str) for f in features):
+                return False, 'SoftwareApplication featureList must be an array of strings'
+
+        # 如果有 keywords,验证其为数组
+        if 'keywords' in data:
+            keywords = data['keywords']
+            if not isinstance(keywords, list):
+                return False, 'SoftwareApplication keywords must be an array'
+            if not all(isinstance(k, str) for k in keywords):
+                return False, 'SoftwareApplication keywords must be an array of strings'
+
+        # 如果有 manufacturer,验证其为 Organization
+        if 'manufacturer' in data:
+            manufacturer = data['manufacturer']
+            if not isinstance(manufacturer, dict):
+                return False, 'SoftwareApplication manufacturer must be a dictionary'
+
+            if manufacturer.get('@type') != 'Organization':
+                return False, 'SoftwareApplication manufacturer must have @type: "Organization"'
+
+            if 'name' not in manufacturer:
+                return False, 'SoftwareApplication manufacturer must have name field'
 
         return True, None

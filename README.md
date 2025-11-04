@@ -7,4 +7,5 @@ Run the following command in your terminal:
 python main.py <url> <markdown_file1> [markdown_file2] ...
 
 python main.py https://www.emqx.com/en/solutions/industries/automotive tests/automotive.md
+python main.py https://www.emqx.com/en/products/emqx-edge tests/emqx-edge.md
 ```

@@ -1,19 +1,21 @@
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "Unified MQTT Platform for Automotive",
-  "description": "MQTT platform for connected cars and software-defined vehicles. EMQX powers 20M+ vehicles, trusted by top OEMs; scalable, secure automotive IoV data backbone.",
+  "name": "The Unified MQTT Platform for Automotive",
+  "description": "Unified MQTT platform for automotive: scalable, secure data backbone powering 20M+ connected cars, trusted by 5/10 largest OEMs for SDVs, V2X, OTA, IIoT.",
   "url": "https://www.emqx.com/en/solutions/industries/automotive",
   "inLanguage": "en",
   "keywords": [
     "MQTT platform",
-    "automotive IoT",
+    "automotive data backbone",
     "connected cars",
     "software-defined vehicles",
-    "V2X communication",
-    "fleet telematics",
+    "V2X",
     "OTA updates",
-    "automotive IIoT"
+    "fleet telematics",
+    "automotive IIoT",
+    "high-volume vehicle data ingestion",
+    "T-Box support"
   ],
   "author": {
     "@type": "Organization",
@@ -29,15 +31,39 @@
       "https://github.com/emqx",
       "https://www.youtube.com/channel/UC5FjR77ErAxvZENEWzQaO5Q",
       "https://www.crunchbase.com/organization/emq-technologies"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "Sales",
+        "url": "https://www.emqx.com/en/contact",
+        "email": "contact@emqx.io"
+      }
     ]
   },
   "publisher": {
     "@type": "Organization",
     "name": "EMQ",
+    "url": "https://www.emqx.com/en",
     "logo": {
       "@type": "ImageObject",
       "url": "https://assets.emqx.com/images/authors/logo.png"
-    }
+    },
+    "sameAs": [
+      "https://x.com/EMQTech",
+      "https://www.linkedin.com/company/emqtech",
+      "https://github.com/emqx",
+      "https://www.youtube.com/channel/UC5FjR77ErAxvZENEWzQaO5Q",
+      "https://www.crunchbase.com/organization/emq-technologies"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "Sales",
+        "url": "https://www.emqx.com/en/contact",
+        "email": "contact@emqx.io"
+      }
+    ]
   },
   "potentialAction": {
     "@type": "ReadAction",
@@ -53,7 +79,7 @@
         "name": "How many electric cars does EMQX currently connect?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "EMQX provides connectivity for over 20 million electric vehicles and connected cars globally. This proven data backbone supports large-scale EV fleets and vehicle-to-cloud communications, enabling remote control, data monitoring, and real-time telemetry. EMQX is trusted by leading OEMs and Tier-1 suppliers and supports 100+ car models and partnerships with 50+ automobile companies, making it a scalable, reliable foundation for global automotive IoV deployments."
+          "text": "EMQX provides connectivity for over 20 million electric vehicles and connected cars globally, serving as the proven data backbone for large-scale EV fleets and vehicle-to-cloud communications. The platform is trusted across the automotive ecosystem — including 5 out of 10 of the largest automobile companies, 7 out of 10 electric vehicle startups, more than 50 automobile companies overall, and support for 100+ car models. For example, SAIC Volkswagen relies on EMQX to support over 1.6 million connected vehicles for remote control and data monitoring, demonstrating EMQX's ability to operate at real-world automotive scale."
         }
       },
       {
@@ -61,7 +87,7 @@
         "name": "What are the core benefits of using MQTT for automotive telematics?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "MQTT is lightweight and efficient, reducing data transfer costs and battery consumption for in-vehicle devices. It provides real-time, low-latency communication essential for vehicle tracking, remote diagnostics, and emergency services. These characteristics enable critical automotive use cases such as over-the-air updates, bidirectional command and control, and high-performance fleet telematics while minimizing bandwidth and power overhead for T-Box and in-vehicle gateways."
+          "text": "MQTT is a lightweight, efficient messaging protocol that reduces data transfer costs and battery consumption while enabling real-time, low-latency communication — essential for vehicle tracking, remote diagnostics, and emergency services. In the automotive context, these benefits translate into reliable bidirectional command and control, efficient OTA updates, and ultra-low latency V2X data streaming. EMQX leverages MQTT to deliver high-volume vehicle data ingestion, T-Box and in-vehicle gateway support, seamless data persistence and bridging to Kafka/databases, and cloud-edge unified management, making it well suited for telematics, SDV functions, and safety-critical applications."
         }
       },
       {
@@ -69,7 +95,7 @@
         "name": "Can EMQX support millions of vehicles simultaneously?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. EMQX is a distributed, high-performance MQTT broker designed to handle millions of concurrent connections and route massive volumes of telemetry data per second. The platform ingests petabytes of telemetry without dropping messages, supports cloud-edge unified management, and is architected to meet the scale and reliability requirements of global OEMs and telematics providers for large-scale connected vehicle deployments."
+          "text": "Yes. EMQX is a distributed, high-performance MQTT platform designed to handle millions of concurrent connections and to ingest petabytes of telemetry and sensor data without dropping messages. The solution's reference architectures illustrate how EMQX connects massive vehicle fleets to cloud infrastructure and supports cloud-edge unified management for synchronized operations. These capabilities meet the scale requirements of global OEMs and telematics providers, enabling reliable routing of massive volumes of telemetry and real-time streaming for V2X and fleet telematics use cases."
         }
       },
       {
@@ -77,7 +103,7 @@
         "name": "How does EMQX improve efficiency in automotive manufacturing?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "EMQX acts as a unified Industrial IoT (IIoT) data backbone that collects and processes real-time data from robots, PLCs, and sensors across the factory floor. By streaming IIoT data into analytics and operational systems, EMQX enables predictive maintenance, automated quality control, optimized production flow, improved traceability across manufacturing and supply chains, and faster responses to regulatory and market changes—helping manufacturers increase uptime and operational efficiency."
+          "text": "EMQX acts as a unified IIoT data backbone for automotive manufacturing by connecting factory assets such as robots, PLCs, and sensors and streaming real-time data to systems used for monitoring and control. This unified data flow enables predictive maintenance, automated quality control, and optimized production flow, improving traceability across manufacturing and production phases. EMQX also supports data persistence and bridging to analytics platforms (Kafka, data lakes, databases), which helps manufacturers turn high-volume operational data into actionable insights that reduce downtime and enhance operational efficiency."
         }
       }
     ]

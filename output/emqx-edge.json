@@ -1,22 +1,27 @@
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "EMQX Edge — Lightweight MQTT Broker for IoT Edge",
-  "description": "Lightweight MQTT broker for IoT edge. EMQX Edge delivers scalable, secure edge MQTT with <5ms latency, 100K+ concurrent connections, 1M+ msgs/sec, tiny footprint.",
+  "name": "EMQX Edge",
+  "description": "Lightweight MQTT broker for IoT Edge — EMQX Edge powers secure, scalable edge messaging with <5ms latency, 100K+ concurrent connections and 1M+ messages/sec.",
   "url": "https://www.emqx.com/en/products/emqx-edge",
   "applicationCategory": "BusinessApplication",
-  "operatingSystem": "Linux, Windows, macOS, Docker, ARM, x86, RISC-V",
+  "operatingSystem": "Linux, Windows, macOS",
+  "softwareHelp": {
+    "@type": "CreativeWork",
+    "name": "EMQX Edge Documentation",
+    "url": "https://docs.emqx.com/en/emqx-edge/latest/"
+  },
   "featureList": [
-    "<5ms latency and high throughput (1M+ messages/second)",
-    "100K+ concurrent connections on a single node",
-    "Boot memory footprint as low as 200KB; typical <10MB memory footprint",
-    "Full MQTT 5.0 & 3.1.1 support",
-    "SQL-based rule engine for real-time data processing (coming soon)",
-    "Bi-directional cloud bridge to EMQX Cloud and other platforms (AWS IoT, Azure IoT Hub)",
-    "OPC UA & Modbus integration via Neuron for IT/OT data unification",
-    "Edge AI/ML integration (coming soon) for low-latency inference",
-    "High-availability clustering for edge deployments",
-    "Enterprise-grade security (TLS/SSL, username/password, JWT), observability and REST API management"
+    "Lightweight MQTT 5.0 & 3.1.1 brokering at the edge",
+    "High performance: <5ms latency, 100K+ concurrent connections, 1M+ messages/second",
+    "Ultra-low memory footprint (boot as low as 200KB; <10MB typical)",
+    "Cross-platform support for Linux, Windows, macOS, ARM, x86 and RISC-V; runs in Docker",
+    "SQL-based rule engine for local real-time data processing (coming soon)",
+    "Seamless, bi-directional cloud bridging (EMQX Cloud, AWS IoT, Azure IoT Hub)",
+    "Enterprise-grade security: TLS/SSL and multiple authentication methods including JWT",
+    "High-availability clustering and persistent store-and-forward buffering",
+    "REST API for configuration and monitoring; Prometheus metrics export",
+    "Integrates with OPC UA and Modbus via Neuron for IT/OT convergence"
   ],
   "manufacturer": {
     "@type": "Organization",
@@ -44,23 +49,17 @@
   },
   "inLanguage": "en",
   "keywords": [
-    "EMQX Edge",
-    "MQTT broker",
-    "edge MQTT",
+    "Lightweight MQTT broker",
+    "Edge MQTT broker",
     "IoT edge",
-    "lightweight MQTT broker",
-    "low latency MQTT",
-    "100K concurrent connections",
     "MQTT 5.0",
-    "OPC UA integration",
-    "edge AI"
+    "edge computing",
+    "edge-to-cloud bridging",
+    "industrial IoT",
+    "low-latency MQTT",
+    "EMQX Edge",
+    "edge AI/ML integration"
   ],
-  "potentialAction": {
-    "@type": "ReadAction",
-    "target": [
-      "https://www.emqx.com/en/products/emqx-edge"
-    ]
-  },
   "mainEntity": {
     "@type": "FAQPage",
     "mainEntity": [
@@ -69,7 +68,7 @@
         "name": "What is EMQX Edge?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "EMQX Edge is a lightweight MQTT broker specifically designed for the industrial IoT edge. It runs on resource-constrained hardware such as industrial PCs and gateways to manage local device-to-device communication, process data in real time, and securely bridge data to the cloud. The product is optimized for edge performance with metrics cited on the page including <5ms latency, 100K+ concurrent connections on a single node, up to 1M+ messages/second throughput, and a very small memory footprint (boot as low as 200KB and typical footprints under 10MB). EMQX Edge acts as a local data hub to aggregate device data, enable local processing via a SQL-like rule engine (coming soon), and reliably synchronize with central cloud brokers."
+          "text": "EMQX Edge is a lightweight MQTT broker specifically designed for the industrial IoT edge. It runs on resource-constrained hardware (like industrial PCs and gateways) to manage local device-to-device communication, process data in real-time, and securely bridge data to the cloud."
         }
       },
       {
@@ -77,7 +76,7 @@
         "name": "How is EMQX Edge different from EMQX Neuron?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "They work together: EMQX Neuron is a connectivity gateway that collects data from industrial protocols like Modbus and OPC UA and converts that data into MQTT. EMQX Edge is the MQTT broker that receives, processes, and routes that MQTT data at the local site or facility. In practice, Neuron connects to OT devices and publishes standardized MQTT messages, while Edge aggregates those messages, applies processing or rules locally, manages local topic trees and device-to-device communication, and then bridges selected data to the cloud. This separation enables unified IT/OT integration and a scalable edge-to-cloud architecture."
+          "text": "They work together. EMQX Neuron is a connectivity gateway that collects data from various industrial protocols (like Modbus, OPC-UA) and converts it to MQTT. EMQX Edge is the MQTT broker that receives, processes, and routes that MQTT data. Neuron connects to the devices; Edge manages the data flow."
         }
       },
       {
@@ -85,7 +84,7 @@
         "name": "How is EMQX Edge different from EMQX Enterprise/Cloud?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "EMQX Edge is optimized for deployment on edge hardware with limited resources and for autonomous site-level operation. In contrast, EMQX Enterprise and EMQX Cloud are large-scale, clusterable platforms intended for high-availability, massive-scale deployments in data centers or cloud environments. Edge focuses on minimal footprint, low latency, local processing and reliable bridging, while Enterprise/Cloud provide centralized, clusterable services for wide-scale message routing and enterprise integrations. EMQX Edge is designed to bridge data to EMQX Enterprise or Cloud to create a unified namespace across edge and cloud."
+          "text": "EMQX Edge is optimized for deployment on edge hardware with limited resources. EMQX Enterprise and Cloud are large-scale, clusterable platforms designed for high-availability, massive-scale deployments in data centers or the cloud. Edge bridges data to Enterprise or Cloud."
         }
       },
       {
@@ -93,7 +92,7 @@
         "name": "Can EMQX Edge run offline?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. EMQX Edge operates autonomously to manage all local data communication even when disconnected from the cloud. If the connection to the cloud is lost, Edge will buffer data according to its configuration and automatically synchronize buffered messages once connectivity is restored, preventing data loss. Additionally, local processing via the rule engine (coming soon) enables filtering, aggregation, and local actions or alerts without requiring immediate cloud access, making Edge suitable for intermittent or unreliable network environments."
+          "text": "Yes. EMQX Edge operates autonomously to manage all local data communication. If the connection to the cloud is lost, it will buffer data (based on configuration) and automatically sync it once the connection is restored, ensuring no data loss."
         }
       },
       {
@@ -101,7 +100,7 @@
         "name": "Is EMQX Edge free?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "EMQX Edge is free for use cases with up to 10 concurrent connections. For applications that require more connections or commercial support, EMQ provides commercial license options. Details about licensing and limits are available in the product license policy documentation: https://docs.emqx.com/en/emqx-edge/latest/license-policy.html."
+          "text": "EMQX Edge is free for use cases with up to 10 concurrent connections. For applications requiring more connections or commercial support, we offer commercial licenses (see: https://docs.emqx.com/en/emqx-edge/latest/license-policy.html)."
         }
       }
     ]

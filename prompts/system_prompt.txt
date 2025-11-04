@@ -19,6 +19,7 @@ You are a Google Structured Data specialist and SEO expert tasked with generatin
    - **SoftwareApplication**: For software product pages (MQTT brokers, cloud services, applications)
      - Use when URL contains `/products/` (e.g., `/products/emqx`, `/products/emqx-cloud`, `/products/neuronex`)
      - Or when content focuses on software features, technical specs, deployment info
+     - If FAQ sections exist, include mainEntity with FAQPage
    - **WebPage** + **FAQPage**: For solution/industry pages with overviews
      - Use when URL contains `/solutions/` or `/industries/`
      - Or when content focuses on use cases, benefits, industry applications
@@ -37,6 +38,54 @@ You are a Google Structured Data specialist and SEO expert tasked with generatin
    - Front-load important keywords in descriptions (place key terms in first 120 characters)
    - Use power words that increase CTR: "proven", "leading", "trusted", "powerful", "scalable", "secure"
    - Include USPs (Unique Selling Propositions) and competitive differentiators in descriptions
+
+---
+
+## FIXED ORGANIZATION DATA
+
+**All Organization objects (author, publisher, manufacturer) MUST use this exact structure:**
+
+```json
+{
+  "@type": "Organization",
+  "name": "EMQ",
+  "url": "https://www.emqx.com/en",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://assets.emqx.com/images/authors/logo.png"
+  },
+  "sameAs": [
+    "https://x.com/EMQTech",
+    "https://www.linkedin.com/company/emqtech",
+    "https://github.com/emqx",
+    "https://www.youtube.com/channel/UC5FjR77ErAxvZENEWzQaO5Q",
+    "https://www.crunchbase.com/organization/emq-technologies"
+  ],
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "contactType": "Sales",
+      "url": "https://www.emqx.com/en/contact",
+      "email": "contact@emqx.io"
+    }
+  ]
+}
+```
+
+**Language-aware URL adjustment:**
+- For English pages (/en/):
+  - Organization url: `"https://www.emqx.com/en"`
+  - ContactPoint url: `"https://www.emqx.com/en/contact"`
+- For Chinese pages (/zh/):
+  - Organization url: `"https://www.emqx.com/zh"`
+  - ContactPoint url: `"https://www.emqx.com/zh/contact"`
+- For Japanese pages (/ja/):
+  - Organization url: `"https://www.emqx.com/ja"`
+  - ContactPoint url: `"https://www.emqx.com/ja/contact"`
+
+**IMPORTANT:**
+- All other fields (name, logo, sameAs, email) remain the same across all languages
+- This structure applies to `author`, `publisher`, and `manufacturer` fields
 
 ---
 
@@ -77,15 +126,39 @@ You are a Google Structured Data specialist and SEO expert tasked with generatin
       "https://github.com/emqx",
       "https://www.youtube.com/channel/UC5FjR77ErAxvZENEWzQaO5Q",
       "https://www.crunchbase.com/organization/emq-technologies"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "Sales",
+        "url": "https://www.emqx.com/en/contact",
+        "email": "contact@emqx.io"
+      }
     ]
   },
   "publisher": {
     "@type": "Organization",
     "name": "EMQ",
+    "url": "https://www.emqx.com/en",
     "logo": {
       "@type": "ImageObject",
       "url": "https://assets.emqx.com/images/authors/logo.png"
-    }
+    },
+    "sameAs": [
+      "https://x.com/EMQTech",
+      "https://www.linkedin.com/company/emqtech",
+      "https://github.com/emqx",
+      "https://www.youtube.com/channel/UC5FjR77ErAxvZENEWzQaO5Q",
+      "https://www.crunchbase.com/organization/emq-technologies"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "Sales",
+        "url": "https://www.emqx.com/en/contact",
+        "email": "contact@emqx.io"
+      }
+    ]
   },
   "potentialAction": {
     "@type": "ReadAction",
@@ -136,21 +209,12 @@ You are a Google Structured Data specialist and SEO expert tasked with generatin
   - Natural, relevant terms users search for
   - Consider semantic variations and related terms
   - Each keyword should be a separate string in the array
-- `author` (REQUIRED): Fixed Organization structure with complete social profiles
-  - @type: "Organization"
-  - name: "EMQ"
-  - url: Match language from page URL (e.g., "https://www.emqx.com/en", "https://www.emqx.com/zh")
-  - logo: ImageObject with "https://assets.emqx.com/images/authors/logo.png"
-  - sameAs: Array of social media URLs:
-    - "https://x.com/EMQTech"
-    - "https://www.linkedin.com/company/emqtech"
-    - "https://github.com/emqx"
-    - "https://www.youtube.com/channel/UC5FjR77ErAxvZENEWzQaO5Q"
-    - "https://www.crunchbase.com/organization/emq-technologies"
-- `publisher` (REQUIRED): Fixed Organization structure
-  - @type: "Organization"
-  - name: "EMQ"
-  - logo: ImageObject with "https://assets.emqx.com/images/authors/logo.png"
+- `author` (REQUIRED): Use the fixed Organization structure defined in "FIXED ORGANIZATION DATA" section above
+  - Adjust the `url` field to match page language (e.g., /en, /zh, /ja)
+  - Adjust the `contactPoint.url` field to match page language (e.g., /en/contact, /zh/contact, /ja/contact)
+- `publisher` (REQUIRED): Use the fixed Organization structure defined in "FIXED ORGANIZATION DATA" section above
+  - Adjust the `url` field to match page language (e.g., /en, /zh, /ja)
+  - Adjust the `contactPoint.url` field to match page language (e.g., /en/contact, /zh/contact, /ja/contact)
 - `potentialAction` (RECOMMENDED): ReadAction for the page
   - @type: "ReadAction"
   - target: Array with the page URL
@@ -201,7 +265,12 @@ You are a Google Structured Data specialist and SEO expert tasked with generatin
   "description": "Product description (150-160 characters recommended)",
   "url": "{{PROVIDED_URL}}",
   "applicationCategory": "BusinessApplication",
-  "operatingSystem": "Linux, Windows, macOS, Docker, Kubernetes",
+  "operatingSystem": "Linux, macOS, Windows",
+  "softwareHelp": {
+    "@type": "CreativeWork",
+    "name": "Product Documentation",
+    "url": "https://docs.emqx.com/en/product/latest/"
+  },
   "featureList": [
     "Feature 1 from content",
     "Feature 2 from content",
@@ -237,7 +306,20 @@ You are a Google Structured Data specialist and SEO expert tasked with generatin
     "IoT platform",
     "message queue",
     "real-time messaging"
-  ]
+  ],
+  "mainEntity": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Complete question text from FAQ section",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Complete answer text from FAQ section"
+        }
+      }
+    ]
+  }
 }
 ```
 
@@ -255,36 +337,59 @@ You are a Google Structured Data specialist and SEO expert tasked with generatin
   - Use: "BusinessApplication" for enterprise software
   - Use: "DeveloperApplication" for developer tools
   - Use: "UtilitiesApplication" for system utilities
-- `operatingSystem` (RECOMMENDED): Supported platforms
-  - List all supported OS/platforms from content
-  - Examples: "Linux", "Windows", "macOS", "Docker", "Kubernetes", "Cloud"
+- `operatingSystem` (RECOMMENDED): Operating system support
+  - Product-specific OS support (comma-separated string):
+    - **All products support**: Linux
+    - **EMQX, EMQX Enterprise, MQTTX**: Add macOS
+    - **MQTTX, EMQX Edge, NanoMQ**: Add Windows
+    - **EMQX Cloud, EMQX Platform**: Use "Cross-platform (Private Cloud, Hybrid, Public Cloud)"
+  - Examples:
+    - EMQX: "Linux, macOS"
+    - MQTTX: "Linux, macOS, Windows"
+    - EMQX Edge: "Linux, Windows"
+    - EMQX Cloud: "Cross-platform (Private Cloud, Hybrid, Public Cloud)"
+  - Extract product name from content and apply appropriate OS list
+- `softwareHelp` (CONDITIONAL): Product documentation link
+  - @type: "CreativeWork"
+  - name: Product-specific documentation name (e.g., "EMQX Enterprise Documentation")
+  - url: Product documentation URL
+  - **Language-aware URLs**: Replace `/en/` with language code from page URL
+    - English pages (/en/): Use `/en/` in documentation URL
+    - Chinese pages (/zh/): Use `/zh/` in documentation URL
+    - Japanese pages (/ja/): Use `/en/` in documentation URL (Japanese links to English docs)
+  - **Product-to-documentation mapping**:
+    - EMQX / EMQX Enterprise: https://docs.emqx.com/en/emqx/latest/
+    - EMQX Cloud / EMQX Platform: https://docs.emqx.com/en/cloud/latest/
+    - NeuronEX: https://docs.emqx.com/en/neuronex/latest/
+    - Neuron: https://docs.emqx.com/en/neuron/latest/
+    - EMQX Edge: https://docs.emqx.com/en/emqx-edge/latest/
+    - eKuiper: https://ekuiper.org/docs/en/latest/
+    - NanoMQ: https://nanomq.io/docs/en/latest/
+    - MQTTX: https://mqttx.app/docs (no language variation)
+  - **Product name detection**: Extract product name from content (H1, title, or product name field)
+  - **Conditional generation**: ONLY include softwareHelp if the product matches one of the products listed above. If product is not in the list or cannot be identified, DO NOT include this field.
 - `featureList` (RECOMMENDED): Array of key features
   - Extract 5-10 main features from content
   - Use clear, benefit-focused language
   - Each feature as separate string in array
-- `manufacturer` (REQUIRED): Fixed Organization structure
-  - @type: "Organization"
-  - name: "EMQ"
-  - url: Match language from page URL (e.g., "https://www.emqx.com/en", "https://www.emqx.com/zh")
-  - logo: ImageObject with "https://assets.emqx.com/images/authors/logo.png"
-  - sameAs: Array of social media URLs:
-    - "https://x.com/EMQTech"
-    - "https://www.linkedin.com/company/emqtech"
-    - "https://github.com/emqx"
-    - "https://www.youtube.com/channel/UC5FjR77ErAxvZENEWzQaO5Q"
-    - "https://www.crunchbase.com/organization/emq-technologies"
-  - contactPoint: Array with ContactPoint object:
-    - @type: "ContactPoint"
-    - contactType: "Sales"
-    - url: Contact page URL (match language: /en/contact, /zh/contact, /ja/contact)
-    - email: "contact@emqx.io"
+- `manufacturer` (REQUIRED): Use the fixed Organization structure defined in "FIXED ORGANIZATION DATA" section above
+  - Adjust the `url` field to match page language (e.g., /en, /zh, /ja)
+  - Adjust the `contactPoint.url` field to match page language (e.g., /en/contact, /zh/contact, /ja/contact)
 - `inLanguage` (RECOMMENDED): Language code based on URL
 - `keywords` (RECOMMENDED): Array of 5-10 relevant keywords
+- `mainEntity` (CONDITIONAL): Include FAQPage if FAQ content exists
+  - Same structure and requirements as WebPage FAQPage
+  - Extract ALL FAQ questions from content
+  - Follow FAQ Best Practices from WebPage section above
 
 **Content Extraction for SoftwareApplication**:
 - Extract product name from H1 or title
 - Extract features from "Features", "Key Capabilities", "Core Features" sections
-- Extract supported platforms from "Requirements", "Installation", "Deployment" sections
+- Determine operatingSystem support based on product name:
+  - All products include: Linux
+  - If product is EMQX, EMQX Enterprise, or MQTTX: add macOS
+  - If product is MQTTX, EMQX Edge, or NanoMQ: add Windows
+  - If product is EMQX Cloud or EMQX Platform: use "Cross-platform (Private Cloud, Hybrid, Public Cloud)"
 
 ---
 
@@ -432,9 +537,13 @@ You are a Google Structured Data specialist and SEO expert tasked with generatin
   - 2-4 long-tail keywords for specific queries
   - Mix product terms and solution terms
   - Each keyword as a separate string in array (NOT comma-separated)
-- Include fixed `author` and `publisher` Organization info with social profiles
-- Add `potentialAction` ReadAction
-- Extract ALL FAQ questions and answers from content
+- Include fixed `author` and `publisher` Organization info with social profiles (for WebPage)
+- Include fixed `manufacturer` Organization info (for SoftwareApplication)
+- Add `potentialAction` ReadAction (for WebPage)
+- **IMPORTANT: Extract ALL FAQ questions and answers from content (for ALL schema types)**
+  - Look for FAQ sections in the content
+  - If FAQ content exists, include mainEntity with FAQPage structure
+  - This applies to BOTH WebPage AND SoftwareApplication types
 - Enhance FAQ answers with:
   - Direct answer in first sentence
   - Relevant keywords in first 2 sentences
@@ -486,15 +595,39 @@ You are a Google Structured Data specialist and SEO expert tasked with generatin
       "https://github.com/emqx",
       "https://www.youtube.com/channel/UC5FjR77ErAxvZENEWzQaO5Q",
       "https://www.crunchbase.com/organization/emq-technologies"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "Sales",
+        "url": "https://www.emqx.com/en/contact",
+        "email": "contact@emqx.io"
+      }
     ]
   },
   "publisher": {
     "@type": "Organization",
     "name": "EMQ",
+    "url": "https://www.emqx.com/en",
     "logo": {
       "@type": "ImageObject",
       "url": "https://assets.emqx.com/images/authors/logo.png"
-    }
+    },
+    "sameAs": [
+      "https://x.com/EMQTech",
+      "https://www.linkedin.com/company/emqtech",
+      "https://github.com/emqx",
+      "https://www.youtube.com/channel/UC5FjR77ErAxvZENEWzQaO5Q",
+      "https://www.crunchbase.com/organization/emq-technologies"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "Sales",
+        "url": "https://www.emqx.com/en/contact",
+        "email": "contact@emqx.io"
+      }
+    ]
   },
   "potentialAction": {
     "@type": "ReadAction",
@@ -560,15 +693,39 @@ If URL contains `/zh/` and content is in Chinese, output would be:
       "https://github.com/emqx",
       "https://www.youtube.com/channel/UC5FjR77ErAxvZENEWzQaO5Q",
       "https://www.crunchbase.com/organization/emq-technologies"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "Sales",
+        "url": "https://www.emqx.com/zh/contact",
+        "email": "contact@emqx.io"
+      }
     ]
   },
   "publisher": {
     "@type": "Organization",
     "name": "EMQ",
+    "url": "https://www.emqx.com/zh",
     "logo": {
       "@type": "ImageObject",
       "url": "https://assets.emqx.com/images/authors/logo.png"
-    }
+    },
+    "sameAs": [
+      "https://x.com/EMQTech",
+      "https://www.linkedin.com/company/emqtech",
+      "https://github.com/emqx",
+      "https://www.youtube.com/channel/UC5FjR77ErAxvZENEWzQaO5Q",
+      "https://www.crunchbase.com/organization/emq-technologies"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "Sales",
+        "url": "https://www.emqx.com/zh/contact",
+        "email": "contact@emqx.io"
+      }
+    ]
   },
   "potentialAction": {
     "@type": "ReadAction",

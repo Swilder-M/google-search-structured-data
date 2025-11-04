@@ -242,8 +242,8 @@ class StructuredDataValidator:
         推荐字段:
         - description: 应用描述
         - url: 应用URL
-        - applicationCategory: 应用分类
-        - operatingSystem: 支持的操作系统
+        - applicationCategory: 应用分类 (必须与 operatingSystem 同时存在)
+        - operatingSystem: 支持的操作系统 (必须与 applicationCategory 同时存在)
         - featureList: 功能列表
         - manufacturer: 制造商
         - keywords: 关键词数组
@@ -251,6 +251,30 @@ class StructuredDataValidator:
         # 必需字段
         if 'name' not in data:
             return False, 'SoftwareApplication must have name field'
+
+        # 验证 applicationCategory 和 operatingSystem 必须同时存在
+        has_app_category = 'applicationCategory' in data
+        has_operating_system = 'operatingSystem' in data
+
+        if has_app_category and not has_operating_system:
+            return False, 'SoftwareApplication with applicationCategory must also have operatingSystem field'
+
+        if has_operating_system and not has_app_category:
+            return False, 'SoftwareApplication with operatingSystem must also have applicationCategory field'
+
+        # 验证 applicationCategory 格式
+        if has_app_category:
+            app_category = data['applicationCategory']
+            if not isinstance(app_category, str):
+                return False, 'SoftwareApplication applicationCategory must be a string'
+            if app_category not in ['BusinessApplication', 'DeveloperApplication', 'UtilitiesApplication']:
+                return False, 'SoftwareApplication applicationCategory must be one of: BusinessApplication, DeveloperApplication, UtilitiesApplication'
+
+        # 验证 operatingSystem 格式
+        if has_operating_system:
+            operating_system = data['operatingSystem']
+            if not isinstance(operating_system, str):
+                return False, 'SoftwareApplication operatingSystem must be a string'
 
         # 如果有 featureList,验证其为数组
         if 'featureList' in data:
